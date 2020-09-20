@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>Remove Powered By</name>
+    <version>0.9</version>
+    <author>selby.su</author>
+    <link>https://selby.su</link>
+    <code>remove_powered_by</code>
+
+    <file path="catalog/language/ru-ru/common/footer.php">
+        <operation>
+            <search><![CDATA[ $_['text_powered']      = 'Работает на <a target="_blank" href="https://ocstore.com/">ocStore</a><br /> %s &copy; %s'; ]]></search>
+            <add position="replace" offset="1"><![CDATA[
+$_['text_powered']      = '%s &copy; %s';]]></add>
+        </operation>
+    </file>
+
+    <file path="catalog/language/en-gb/common/footer.php">
+        <operation>
+            <search><![CDATA[ $_['text_powered']      = 'Powered By <a href="https://ocstore.com/">ocStore</a><br /> %s &copy; %s'; ]]></search>
+            <add position="replace" offset="1"><![CDATA[
+$_['text_powered']      = '%s &copy; %s';]]></add>
+        </operation>
+    </file>
+
+</modification>

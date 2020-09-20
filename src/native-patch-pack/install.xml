@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>Native Patch Pack</name>
+    <version>0.1</version>
+    <author>selby.su</author>
+    <link>https://selby.su</link>
+    <code>native_patch_pack</code>
+
+    <!-- clear cart button -->
+    <file path="catalog/controller/checkout/cart.php">
+        <operation>
+            <search><![CDATA[ public function add() { ]]></search>
+            <add position="before"><![CDATA[
+    public function clear()
+    {
+        $this->cart->clear();
+        $this->response->redirect(
+            $this->url->link('checkout/cart')
+        );
+    }]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/checkout/cart.twig">
+        <operation>
+            <search><![CDATA[ </h1> ]]></search>
+            <add position="after"><![CDATA[
+      <div class="text-right" style="margin-bottom:1rem">
+        <span style="margin-right:1rem">Очистить корзину</span>
+        <a href="/index.php?route=checkout/cart/clear" class="btn btn-danger"><i class="fa fa-times-circle"></i></a>
+      </div>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/language/ru-ru/checkout/cart.php">
+        <operation>
+            <search><![CDATA[ $_['text_payment_until_canceled_description'] 	= 'Стоимость: %s; Периодичность: %d %s; Кол-во платежей: до отмены'; ]]></search>
+            <add position="after"><![CDATA[
+$_['text_clear_cart'] = 'Очистить корзину';]]></add>
+        </operation>
+    </file>
+    <file path="catalog/language/en-gb/checkout/cart.php">
+        <operation>
+            <search><![CDATA[ $_['text_payment_cancel']      = '%s every %d %s(s) until canceled'; ]]></search>
+            <add position="after"><![CDATA[
+$_['text_clear_cart'] = 'Clear Cart';]]></add>
+        </operation>
+    </file>
+
+    <!-- remove powered by -->
+    <file path="catalog/language/ru-ru/common/footer.php">
+        <operation>
+            <search><![CDATA[ $_['text_powered']      = 'Работает на <a target="_blank" href="https://ocstore.com/">ocStore</a><br /> %s &copy; %s'; ]]></search>
+            <add position="replace" offset="1"><![CDATA[
+$_['text_powered']      = '%s &copy; %s';]]></add>
+        </operation>
+    </file>
+    <file path="catalog/language/en-gb/common/footer.php">
+        <operation>
+            <search><![CDATA[ $_['text_powered']      = 'Powered By <a href="https://ocstore.com/">ocStore</a><br /> %s &copy; %s'; ]]></search>
+            <add position="replace" offset="1"><![CDATA[
+$_['text_powered']      = '%s &copy; %s';]]></add>
+        </operation>
+    </file>
+
+    <!-- seo breadcrumbs -->
+    <file path="catalog/view/theme/default/template/account/account.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/account/address_form.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/account/address_list.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/account/reward.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/account/tracking.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/account/transaction.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/account/voucher.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/account/wishlist.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/affiliate/login.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/affiliate/register.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/blog/article.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/blog/category.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/blog/latest.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/checkout/cart.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/common/success.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/error/not_found.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/extension/credit_cart/sagepay_direct_form.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/extension/credit_cart/sagepay_direct_list.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/extension/credit_cart/sagepay_server_list.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/extension/credit_cart/squareup.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/information/contact.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/information/information.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/information/sitemap.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/information/tracking.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/product/category.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/product/compare.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/product/manufacturer_info.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/product/manufacturer_list.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/product/product.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/product/search.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/product/special.twig">
+        <operation>
+            <search><![CDATA[ <ul class="breadcrumb"> ]]></search>
+            <add position="replace" offset="5"><![CDATA[
+  <ul class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for key, breadcrumb in breadcrumbs %}
+      {% if key + 1 < breadcrumbs|length %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemscope itemtype="https://schema.org/Thing" itemprop="item" href="{{ breadcrumb.href }}"><span itemprop="name">{{ breadcrumb.text }}</span></a>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% else %}
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">{{ breadcrumb.text }}</span>
+        <meta itemprop="position" content="{{key+1}}">
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>]]></add>
+        </operation>
+    </file>
+
+</modification>
