@@ -19,11 +19,9 @@ CMS Opencart и ее руссифицированная модификация o
 
 * Feedback [(скачать)](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/feedback.ocmod.zip) - позволяет добавить форму обратной связи на любую страницу сайта.
 
-* Remove Powered By [(скачать)](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/remove-powered-by.ocmod.zip)
-- убирает текст "работает на ocStore" из футера.
+* Remove Powered By [(скачать)](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/remove-powered-by.ocmod.zip) - убирает текст "работает на ocStore" из футера.
 
-* SEO Breadcrumbs [(скачать)](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/seo-breadcrumbs.ocmod.zip)
-- убирает ссылку из последнего пункта хлебных крошек со всех страниц сайта, а также добавляет к хлебным крошкам валидную микроразметку (SHEMA.ORG).
+* SEO Breadcrumbs [(скачать)](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/seo-breadcrumbs.ocmod.zip) - убирает ссылку из последнего пункта хлебных крошек со всех страниц сайта, а также добавляет к хлебным крошкам валидную микроразметку (SHEMA.ORG).
 
 ##### Версия
 * v. 0.1
