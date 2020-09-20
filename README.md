@@ -15,14 +15,22 @@ CMS Opencart и ее руссифицированная модификация o
 * обновить кэш в разделе "модификаторы"
 
 ##### Описание модулей
-* [Clear Cart Button](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/clear-cart-button.ocmod.zip) - добавляет кнопку удаления товаров на страницу корзины. Это позволит сэкономить время и нервы клиентам вашего онлайн-магазина, поскольку в стандартном Opencart'е удаление товаров реализованно по одному через перезагрузку страницы, из-за чего удаление десятка или нескольких десятков товаров может затянуться на целую вечность. Данный модуль решает эту проблему. Кнопка удаления товаров располагается сразу после заголовка &lt;h1&gt; прямо перед списком товаров.
-* [Feedback](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/feedback.ocmod.zip) - позволяет добавить форму обратной связи на любую страницу сайта.
-* [Remove Powered By](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/remove-powered-by.ocmod.zip) - убирает текст "работает на ocStore" из футера.
-* [SEO Breadcrumbs](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/seo-breadcrumbs.ocmod.zip) - убирает ссылку из последнего пункта хлебных крошек со всех страниц сайта, а также добавляет к хлебным крошкам валидную микроразметку (SHEMA.ORG).
+* [Clear Cart Button](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/clear-cart-button.ocmod.zip)
+- добавляет кнопку удаления товаров на страницу корзины. Это позволит сэкономить время и нервы клиентам вашего онлайн-магазина, поскольку в стандартном Opencart'е удаление товаров реализованно по одному через перезагрузку страницы, из-за чего удаление десятка или нескольких десятков товаров может затянуться на целую вечность. Данный модуль решает эту проблему. Кнопка удаления товаров располагается сразу после заголовка &lt;h1&gt; прямо перед списком товаров.
+
+* [Feedback](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/feedback.ocmod.zip)
+- позволяет добавить форму обратной связи на любую страницу сайта.
+
+* [Remove Powered By](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/remove-powered-by.ocmod.zip)
+- убирает текст "работает на ocStore" из футера.
+
+* [SEO Breadcrumbs](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/seo-breadcrumbs.ocmod.zip)
+- убирает ссылку из последнего пункта хлебных крошек со всех страниц сайта, а также добавляет к хлебным крошкам валидную микроразметку (SHEMA.ORG).
 
 ##### Версия
 * v. 0.1
 > модули находятся в разработке, планируется их улучшение и дополнение
+
 > могут встречаться баги
 
 ##### Совместимость
@@ -34,4 +42,4 @@ CMS Opencart и ее руссифицированная модификация o
 ##### Лицензия
 Модули распространяются под лицензией [MIT](https://github.com/smysloff/opencart-native-patch-pack/blob/master/LICENSE).
 
-> Пользуйтесь смело и на здоровье ;)
+> пользуйтесь смело и на здоровье ;)
