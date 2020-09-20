@@ -15,13 +15,13 @@ CMS Opencart и ее руссифицированная модификация o
 * обновить кэш в разделе "модификаторы"
 
 ##### Описание модулей
-* Clear Cart Button [(скачать)](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/clear-cart-button.ocmod.zip) - добавляет кнопку удаления товаров на страницу корзины. Это позволит сэкономить время и нервы клиентам вашего онлайн-магазина, поскольку в стандартном Opencart'е удаление товаров реализованно по одному через перезагрузку страницы, из-за чего удаление десятка или нескольких десятков товаров может затянуться на целую вечность. Данный модуль решает эту проблему. Кнопка удаления товаров располагается сразу после заголовка &lt;h1&gt; прямо перед списком товаров.
+* **Clear Cart Button** [(скачать)](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/clear-cart-button.ocmod.zip) - добавляет кнопку удаления товаров на страницу корзины. Это позволит сэкономить время и нервы клиентам вашего онлайн-магазина, поскольку в стандартном Opencart'е удаление товаров реализованно по одному через перезагрузку страницы, из-за чего удаление десятка или нескольких десятков товаров может затянуться на целую вечность. Данный модуль решает эту проблему. Кнопка удаления товаров располагается сразу после заголовка &lt;h1&gt; прямо перед списком товаров.
 
-* Feedback [(скачать)](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/feedback.ocmod.zip) - позволяет добавить форму обратной связи на любую страницу сайта.
+* **Feedback** [(скачать)](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/feedback.ocmod.zip) - позволяет добавить форму обратной связи на любую страницу сайта.
 
-* Remove Powered By [(скачать)](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/remove-powered-by.ocmod.zip) - убирает текст "работает на ocStore" из футера.
+* **Remove Powered By** [(скачать)](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/remove-powered-by.ocmod.zip) - убирает текст "работает на ocStore" из футера.
 
-* SEO Breadcrumbs [(скачать)](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/seo-breadcrumbs.ocmod.zip) - убирает ссылку из последнего пункта хлебных крошек со всех страниц сайта, а также добавляет к хлебным крошкам валидную микроразметку (SHEMA.ORG).
+* **SEO Breadcrumbs** [(скачать)](https://github.com/smysloff/opencart-native-patch-pack/tree/master/dist/seo-breadcrumbs.ocmod.zip) - убирает ссылку из последнего пункта хлебных крошек со всех страниц сайта, а также добавляет к хлебным крошкам валидную микроразметку (SHEMA.ORG).
 
 ##### Версия
 * v. 0.1
